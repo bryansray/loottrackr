@@ -1,0 +1,123 @@
+<div id="loot-chart">Chart</div>
+<div id="gear-level-chart">Chart</div>
+
+<div class="pull-right recent-loot">
+	<h3>Recent Loot</h3>
+	<ul class="list">
+		<% @recent_loot.each do |loot| %>
+			<li><%= link_to loot.item.name, loot_path(loot) %>
+		<% end %>
+	</ul>
+</div>
+
+<script>
+$(document).ready(function() {
+	var chart = new Highcharts.Chart({
+		chart: {
+			renderTo: 'loot-chart',
+			plotBackgroundColor: null,
+			plotBorderWidth: null,
+			plotShadow: false
+		},
+		title: {
+			text: 'Loot Distribution by Type'
+		},
+		tooltip: {
+			formatter: function() {
+				return '<b>'+ this.point.name +'</b>: '+ this.y +' items';
+			}
+		},
+		plotOptions: {
+			pie: {
+				allowPointSelect: true,
+				cursor: 'pointer',
+				dataLabels: {
+					enabled: true,
+					color: '#000000',
+					connectorColor: '#000000',
+					formatter: function() {
+						return '<b>'+ this.point.name +'</b>: '+ Math.round(this.percentage) +' %';
+					}
+				}
+			}
+		},
+		series: [{
+			type: 'pie',
+			name: 'Loot Type',
+			data: [
+				['Mail',   5.0],
+				['Plate', 3.0],
+				{
+					name: 'Leather',
+					y: 3.0,
+					sliced: true,
+					selected: true
+				},
+				['Cloth', 2.0],
+				// ['Tier', 12.0],
+				// ['Weapon', 6.0],
+				// ['Other',   8.0]
+			]
+		}]
+	});
+
+	var chart2 = new Highcharts.Chart({
+			chart: {
+				renderTo: 'gear-level-chart',
+				type: 'column'
+			},
+			title: {
+				text: 'Average Gear Score'
+			},
+			subtitle: {
+				text: 'Source: WorldClimate.com'
+			},
+			xAxis: {
+				categories: [
+					'Virtual',
+					'Kazuhiro',
+					'Mischi',
+					'Keljahl',
+					'Clete',
+					'Thundersnow',
+					'Valarian',
+					'Urielle',
+					'Ganvil',
+					'Kakana'
+				]
+			},
+			yAxis: {
+				min: 395,
+				title: {
+					text: 'Average Gear Score'
+				}
+			},
+			legend: {
+				layout: 'vertical',
+				backgroundColor: '#FFFFFF',
+				align: 'left',
+				verticalAlign: 'top',
+				x: 100,
+				y: 70,
+				floating: true,
+				shadow: true
+			},
+			tooltip: {
+				formatter: function() {
+					return ''+
+						this.x +': '+ this.y +' mm';
+				}
+			},
+			plotOptions: {
+				column: {
+					pointPadding: 0.2,
+					borderWidth: 0
+				}
+			},
+				series: [{
+				data: [400.47, 401.24, 399.81, 396.65, 403.06, 398.53, 400.56, 404.94, 402.71, 399.71]
+			}]
+		});
+	
+});
+</script>

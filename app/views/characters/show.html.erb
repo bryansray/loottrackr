@@ -1,0 +1,48 @@
+<div id="gear-level-chart" class="gear-level-chart">&nbsp;
+</div>
+
+<div class="recent-loot pull-left">
+	<h3>Recent Loot</h3>
+	<ul>
+		<% @recent_loot.each do |loot| %>
+		<li>
+			<%= link_to loot.item.name, item_path(loot.item), :rel => "item=#{loot.item.wowhead_id}", :class => loot_styles(loot.item) %>
+			<% if !loot.received_on.nil? %> 
+				received on <%= loot.received_on.strftime("%B %d, %Y") %>
+			<% end %>
+		</li>
+		<% end%>
+	</ul>
+</div>
+
+<div class="equipped-items pull-left">
+	<h3>Equipped Items</h3>
+	<ul>
+		<% @character.equipped_items.each do |item| %>
+		<li><%= link_to item.name, item_path(item), :rel => "item=#{item.wowhead_id}", :class => loot_styles(item) %> (<%= item.level %>)</li>
+		<% end %>
+	</ul>
+</div>
+
+<script>
+$(document).ready(function() {
+    var chart = new Highcharts.Chart({
+        chart: {
+            renderTo: 'gear-level-chart',
+            type: 'line',
+            width: 800
+        },
+		
+		title: { text: "Gear Progression" },
+        
+        xAxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        },
+        
+        series: [{
+            data: [391, 394, 399, 401, null, null, null, null, null, null, null, null]
+        }]
+    });
+});
+
+</script>
