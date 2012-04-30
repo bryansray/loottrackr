@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(:version => 20120428210211) do
     t.integer  "item_id"
     t.boolean  "equipped",     :default => false
     t.boolean  "disenchanted", :default => false
+    t.boolean  "main",         :default => true
     t.date     "received_on"
     t.datetime "created_at",                      :null => false
     t.datetime "updated_at",                      :null => false
