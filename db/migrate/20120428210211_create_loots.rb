@@ -6,6 +6,7 @@ class CreateLoots < ActiveRecord::Migration
       
       t.boolean :equipped, :default => false
       t.boolean :disenchanted, :default => false
+      t.boolean :main, :default => true
 
       t.date :received_on
 
