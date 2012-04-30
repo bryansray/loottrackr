@@ -1,65 +1,71 @@
 <div id="loot-chart">Chart</div>
 <div id="gear-level-chart">Chart</div>
 
-<div class="pull-right recent-loot">
-	<h3>Recent Loot</h3>
-	<ul class="list">
-		<% @recent_loot.each do |loot| %>
-			<li><%= link_to loot.item.name, loot_path(loot) %>
-		<% end %>
-	</ul>
+<h3>Recent Loot</h3>
+<div class="recent-loot">
+	<% @recent_loot.each do |loot| %>
+		<div class="loot-card pull-left">
+			<b><%= link_to loot.item.name, loot_path(loot) %></b> 
+			<% if !loot.character.nil? %> 
+			was received by <%= link_to loot.character.name, character_path(loot.character) %>
+			<% else %>
+				was disenchanted
+			<% end %>
+		</div>
+	<% end %>
+
 </div>
 
 <script>
 $(document).ready(function() {
-	var chart = new Highcharts.Chart({
-		chart: {
-			renderTo: 'loot-chart',
-			plotBackgroundColor: null,
-			plotBorderWidth: null,
-			plotShadow: false
-		},
-		title: {
-			text: 'Loot Distribution by Type'
-		},
-		tooltip: {
-			formatter: function() {
-				return '<b>'+ this.point.name +'</b>: '+ this.y +' items';
-			}
-		},
-		plotOptions: {
-			pie: {
-				allowPointSelect: true,
-				cursor: 'pointer',
-				dataLabels: {
-					enabled: true,
-					color: '#000000',
-					connectorColor: '#000000',
-					formatter: function() {
-						return '<b>'+ this.point.name +'</b>: '+ Math.round(this.percentage) +' %';
-					}
-				}
-			}
-		},
-		series: [{
-			type: 'pie',
-			name: 'Loot Type',
-			data: [
-				['Mail',   5.0],
-				['Plate', 3.0],
-				{
-					name: 'Leather',
-					y: 3.0,
-					sliced: true,
-					selected: true
-				},
-				['Cloth', 2.0],
-				// ['Tier', 12.0],
-				// ['Weapon', 6.0],
-				// ['Other',   8.0]
-			]
-		}]
-	});
+	// var chart = new Highcharts.Chart({
+	// 		chart: {
+	// 			renderTo: 'loot-chart',
+	// 			plotBackgroundColor: null,
+	// 			plotBorderWidth: null,
+	// 			plotShadow: false
+	// 		},
+	// 		title: {
+	// 			text: 'Loot Distribution by Type'
+	// 		},
+	// 		tooltip: {
+	// 			formatter: function() {
+	// 				return '<b>'+ this.point.name +'</b>: '+ this.y +' items';
+	// 			}
+	// 		},
+	// 		plotOptions: {
+	// 			pie: {
+	// 				allowPointSelect: true,
+	// 				cursor: 'pointer',
+	// 				dataLabels: {
+	// 					enabled: true,
+	// 					color: '#000000',
+	// 					connectorColor: '#000000',
+	// 					formatter: function() {
+	// 						return '<b>'+ this.point.name +'</b>: '+ Math.round(this.percentage) +' %';
+	// 					}
+	// 				}
+	// 			}
+	// 		},
+	// 		series: [{
+	// 			type: 'pie',
+	// 			name: 'Loot Type',
+	// 			data: [
+	// 				['Mail',   5.0],
+	// 				['Plate', 3.0],
+	// 				{
+	// 					name: 'Leather',
+	// 					y: 3.0,
+	// 					sliced: true,
+	// 					selected: true
+	// 				},
+	// 				['Cloth', 2.0],
+	// 				// ['Tier', 12.0],
+	// 				// ['Weapon', 6.0],
+	// 				// ['Other',   8.0]
+	// 			]
+	// 		}]
+	// 	});
 
 	var chart2 = new Highcharts.Chart({
 			chart: {
@@ -73,18 +79,7 @@ $(document).ready(function() {
 				text: 'Source: WorldClimate.com'
 			},
 			xAxis: {
-				categories: [
-					'Virtual',
-					'Kazuhiro',
-					'Mischi',
-					'Keljahl',
-					'Clete',
-					'Thundersnow',
-					'Valarian',
-					'Urielle',
-					'Ganvil',
-					'Kakana'
-				]
+				categories: <%=raw @characters.map{ |c| c.name } %>
 			},
 			yAxis: {
 				min: 395,
@@ -105,7 +100,7 @@ $(document).ready(function() {
 			tooltip: {
 				formatter: function() {
 					return ''+
-						this.x +': '+ this.y +' mm';
+						this.x +': '+ this.y +' Gear Score';
 				}
 			},
 			plotOptions: {
@@ -115,7 +110,11 @@ $(document).ready(function() {
 				}
 			},
 				series: [{
-				data: [400.47, 401.24, 399.81, 396.65, 403.06, 398.53, 400.56, 404.94, 402.71, 399.71]
+				data: [
+				<% @characters.each do |c| %>
+				{ name: "<%= c.name %>", color: "<%= c.css_color_code %>", y:  <%= c.gear_level %> },
+				<% end %>
+				]
 			}]
 		});
 	

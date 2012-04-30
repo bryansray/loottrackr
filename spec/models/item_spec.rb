@@ -10,4 +10,25 @@ describe Item do
     item = Item.new :level => 397
     item.should_not be_heroic
   end
+  
+  it "should have a unique name" do
+    item1 = Item.create :name => "Item 1", :level => 397
+    item2 = Item.new :name => "Item 1", :level => 397
+    
+    item2.should_not be_valid
+  end
+  
+  it "should be case insensitive" do
+    item1 = Item.create :name => "Item 1", :level => 397
+    item2 = Item.new :name => "item 1", :level => 397
+    
+    item2.should_not be_valid
+  end
+  
+  it "should not be unique if the item is a different level" do
+    item1 = Item.create :name => "Item 1", :level => 397
+    item2 = Item.new :name => "Item 1", :level => 410
+    
+    item2.should be_valid
+  end
 end

@@ -120,3 +120,13 @@ a.heroic {
 .shaman a:link, .shaman a:visited { color:  #0070DE; }
 .warlock a:link, .warlock a:visited { color:  #9482C9; }
 .warrior a:link, .warrior a:visited { color:  #C79C6E; }
+
+
+.loot-card {
+	width: 163px;
+	border: 1px solid #ccc;
+	-webkit-border-radius: 4px;
+	padding: 5px;
+	margin: 5px;
+	background-color: #efefef;
+}

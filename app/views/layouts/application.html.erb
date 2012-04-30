@@ -11,6 +11,7 @@
 			<div class="row-fluid row">
 				<div class="span3 sidebar">
 					<ul class="curl">
+						<li><%= link_to "Overview", root_path, :class => "brand" %></li>
 						<% @characters.each do |character| %>
 							<li class="<%= active?(character) %> <%= character.clazz.gsub(/\s+/, "").underscore %>"><%= link_to character.name, character_path(character) %></li>
 						<% end %>
