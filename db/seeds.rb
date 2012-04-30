@@ -272,6 +272,23 @@ virtual = Character.create({name: "Virtual", clazz: "Paladin"})
 
 felania = Character.create({name: "Felania", clazz: "Death Knight"})
 [
+  {name: "Necrotic Boneplate Helmet", level: 397, equipped: true},
+  {name: "Necklace of Black Dragon's Teeth", level: 397, equipped: true},
+  {name: "Backbreaker Spaulders", level: 390, equipped: true},
+  {name: "Dreamcrusher Drape", level: 397, equipped: true},
+  {name: "Necrotic Boneplate Breastplate", level: 397, equipped: true},
+  {name: "Rockhide Bracers", level: 397, equipped: true},
+  {name: "Necrotic Boneplate Gauntlets", level: 397, equipped: true},
+  {name: "Girdle of the Queen's Champion", level: 378, equipped: true},
+  {name: "Necrotic Boneplate Greaves", level: 384, equipped: true},
+  {name: "Kneebreaker Boots", level: 397, equipped: true},
+  {name: "Ring of Torn Flesh", level: 397, equipped: true},
+  {name: "Breathstealer Band", level: 384, equipped: true},
+  {name: "Creche of the Final Dragon", level: 397, equipped: true},
+  {name: "License to Slay", level: 359, equipped: true},
+  {name: "Gurthalak, Voice of the Deeps", level: 403, equipped: true},
+  {name: "Gutripper Shard", level: 397, equipped: true},
+  
   {name: "Hand of Morchok", level: 410, equipped: false, received_on: Date.new(2012, 4, 22) },
   {name: "Gurthalak", level: 397, equipped: true, received_on: Date.new(2012, 4, 23) },
 ].each do |i|
