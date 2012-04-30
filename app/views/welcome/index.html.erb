@@ -82,7 +82,7 @@ $(document).ready(function() {
 				categories: <%=raw @characters.map{ |c| c.name } %>
 			},
 			yAxis: {
-				min: 395,
+				min: <%= @characters.map{ |c| c.gear_level }.min - 3 %>,
 				title: {
 					text: 'Average Gear Score'
 				}
