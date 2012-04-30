@@ -26,6 +26,10 @@ group :test, :development do
   gem "rspec-rails"
 end
 
+group :production do
+  gem "mysql2"
+end
+
 
 gem 'jquery-rails'
 
