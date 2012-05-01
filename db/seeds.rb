@@ -10,7 +10,8 @@ require 'date'
 def create_and_equip_for_character(i, character)
     item = Item.find_by_name_and_level(i[:name], i[:level]) 
     item = Item.create({name: i[:name], level: i[:level], :wowhead_id => i[:wowhead_id]}) if item.nil?
-    loot = Loot.new({character: character, item: item, equipped: i[:equipped], received_on: i[:received_on]})
+    i[:main] = true if i[:main].nil?
+    loot = Loot.new({character: character, item: item, equipped: i[:equipped], received_on: i[:received_on], main: i[:main]})
     loot.save if loot.valid?
 end
 
@@ -272,6 +273,28 @@ virtual = Character.create({name: "Virtual", clazz: "Paladin"})
 
 felania = Character.create({name: "Felania", clazz: "Death Knight"})
 [
+  {name: "Necrotic Boneplate Faceguard", level: 397, equipped: true },
+  {name: "Guardspike Choker", level: 397, equipped: true },
+  {name: "Necrotic Boneplate Shoulderguards", level: 397, equipped: true },
+  {name: "Indefatigable Greatcloak", level: 397, equipped: true },
+  {name: "Necrotic Boneplate Chestguard", level: 397, equipped: true },
+  {name: "Titanguard Wristplates", level: 397, equipped: true },
+  {name: "Necrotic Boneplate Handguards", level: 397, equipped: true },
+  {name: "Goriona's Collar", level: 397, equipped: true },
+  {name: "Foundations of Courage", level: 397, equipped: true },
+  {name: "Bladeshatter Treads", level: 397, equipped: true },
+  {name: "Signet of the Resolute", level: 397, equipped: true },
+  {name: "Deflecting Brimstone Band", level: 378, equipped: true },
+  {name: "Fire of the Deep", level: 397, equipped: true },
+  {name: "Resolve of Undying", level: 403, equipped: true },
+  {name: "Experimental Specimen Slicer", level: 397, equipped: true },
+  {name: "Deathclutch Figurine", level: 378, equipped: true },
+].each do |i|
+    i[:main] = true
+    create_and_equip_for_character(i, felania)
+  end
+
+[
   {name: "Necrotic Boneplate Helmet", level: 397, equipped: true},
   {name: "Necklace of Black Dragon's Teeth", level: 397, equipped: true},
   {name: "Backbreaker Spaulders", level: 390, equipped: true},
@@ -292,6 +315,7 @@ felania = Character.create({name: "Felania", clazz: "Death Knight"})
   {name: "Hand of Morchok", level: 410, equipped: false, received_on: Date.new(2012, 4, 22) },
   {name: "Gurthalak", level: 397, equipped: true, received_on: Date.new(2012, 4, 23) },
 ].each do |i|
+    i[:main] = false
     create_and_equip_for_character(i, felania)
   end
 
