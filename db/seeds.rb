@@ -15,6 +15,9 @@ def create_and_equip_for_character(i, character)
     loot.save if loot.valid?
 end
 
+i = {name: "Razor Saronite Chip", level: 410, wowhead_id: "78369", disenchanted: true, received_on: Date.new(2012, 4, 29), equipped: false}
+create_and_equip_for_character(i, nil)
+
 clete = Character.create({name: "Clete", clazz: "Hunter"})
 [
   {name: "Wyrmstalker's Headguard", :level => 397, :equipped => true },
