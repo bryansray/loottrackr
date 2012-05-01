@@ -7,7 +7,8 @@
 		<div class="loot-card pull-left">
 			<b><%= link_to loot.item.name, loot_path(loot) %></b> 
 			<% if !loot.character.nil? %> 
-			was received by <%= link_to loot.character.name, character_path(loot.character) %>
+			was received by <%= link_to loot.character.name, character_path(loot.character) %> 
+			on <%= loot.received_on.strftime("%m/%d/%Y") %>
 			<% else %>
 				was disenchanted
 			<% end %>
