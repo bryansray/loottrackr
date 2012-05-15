@@ -1,0 +1,55 @@
+<%= form_for @loot, :html => { :class => "form-horizontal well span8" } do |f| %>
+	<fieldset>
+		<legend>Loot Information</legend>
+
+		<div class="control-group">
+            <label class="control-label" for="select01">Item</label>
+            <div class="controls">
+              <%= f.select(:item_id, @items)%>
+            </div>
+          </div>
+		  
+		  <div class="control-group">
+            <label class="control-label" for="select01">Character</label>
+            <div class="controls">
+				<%= f.select(:character_id, @main_characters) %>
+            </div>
+          </div>
+		  
+		  <div class="control-group">
+		  	<label class="control-label" for="received_on">Received On</label>
+			<div class="controls">
+				<%= f.text_field :received_on, :value => "Today" %>
+			</div>
+		  </div>
+		  
+		  <div class="control-group">
+            <label class="control-label" for="optionsCheckboxList">Options</label>
+            <div class="controls">
+              <label class="checkbox">
+				  <%= f.check_box :equipped %>
+				  Was the item equipped?
+              </label>
+              <label class="checkbox">
+				  <%= f.check_box :disenchanted %>
+					Was the item disenchanted?
+              </label>
+              <label class="checkbox">
+				  <%= f.check_box :main %>
+					Was the item for off-spec?
+              </label>
+              <!-- <p class="help-block"><strong>Note:</strong> Labels surround all the options for much larger click areas and a more usable form.</p> -->
+            </div>
+          </div>
+		  <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save changes</button>
+            <button class="btn">Cancel</button>
+          </div>
+	</fieldset>
+<% end %>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	console.log("Loading ...");
+});
+</script>

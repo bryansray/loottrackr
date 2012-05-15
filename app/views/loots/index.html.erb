@@ -1,0 +1,15 @@
+<% @bosses.each do |boss| %>
+	<h3><%= boss.name %></h3>
+	
+	<div class="loot-table clearfix">
+		<% boss.items.order("items.level").each do |item| %>
+			<div class="loot-card pull-left">
+				<span class="badge <%= "badge-success" if item.heroic? %> pull-right"><%= item.level %></span>
+				<b><%= link_to item.name, item_path(item) %></b>
+				<% if item.heroic? %>
+					<p>Heroic</p>
+				<% end %>
+			</div>
+		<% end %>
+	</div>
+<% end %>

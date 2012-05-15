@@ -1,5 +1,5 @@
 class Character < ActiveRecord::Base
-  attr_accessible :name, :clazz
+  attr_accessible :name, :clazz, :main
   
   has_many :loots
   has_many :items, :through => :loots

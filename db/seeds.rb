@@ -15,16 +15,66 @@ def create_and_equip_for_character(i, character)
     loot.save if loot.valid?
 end
 
-i = {name: "Razor Saronite Chip", level: 410, wowhead_id: "78369", disenchanted: true, received_on: Date.new(2012, 4, 29), equipped: false}
-create_and_equip_for_character(i, nil)
+morchok = Boss.create({name: "Morchok"})
+morchok.items.create({name: "Bone-Link Fetish", level: 397, wowhead_id: "77210"})
+morchok.items.create({name: "Bone-Link Fetish", level: 410, wowhead_id: "78002"})
+
+morchok.items.create({name: "Brackenshell Shoulderplates", level: 397, wowhead_id: "77268", slot: "Shoulder", type: "Plate"})
+morchok.items.create({name: "Brackenshell Shoulderplates", level: 410, wowhead_id: "78367", slot: "Shoulder", type: "Plate"})
+
+
+morchok.items.create({name: "Petrified Fungal Heart", level: 397, wowhead_id: "77262"})
+morchok.items.create({name: "Petrified Fungal Heart", level: 410, wowhead_id: ""})
+
+zonozz = Boss.create({name: "Warlord Zon'ozz"})
+yorsahj = Boss.create({name: "Yor'sahj the Unsleeping"})
+hagara = Boss.create({name: "Hagara the Stormbinder"})
+ultraxion = Boss.create({name: "Ultraxion"})
+warmaster = Boss.create({name: "Warmaster Blackhorn"})
+spine = Boss.create({name: "Spine of Deathwing"})
+madness = Boss.create({name: "Madness of Deathwing"})
 
 clete = Character.create({name: "Clete", clazz: "Hunter"})
+ganvil = Character.create({name: "Ganvil", clazz: "Shaman"})
+kakana = Character.create({name: "Kakana", clazz: "Priest"})
+kazuhiro = Character.create({name: "Kazuhiro", clazz: "Warrior"})
+keljahl = Character.create({name: "Keljahl", clazz: "Priest"})
+mischi = Character.create({name: "Mischi", clazz: "Mage"})
+thundersnow = Character.create({name: "Thundersnow", clazz: "Mage"})
+urielle = Character.create({name: "Urielle", clazz: "Rogue"})
+valarian = Character.create({name: "Valarian", clazz: "Paladin"})
+virtual = Character.create({name: "Virtual", clazz: "Paladin"})
+felania = Character.create({name: "Felania", clazz: "Death Knight"})
+voltec = Character.create({name: "Voltec", clazz: "Mage", main: false})
+relaeha = Character.create({name: "Relaeha", clazz: "Priest", main: false})
+
+[{name: "Razor Saronite Chip", level: 410, wowhead_id: "78369", disenchanted: true, received_on: Date.new(2012, 4, 29), equipped: false},
+{name: "Scalpel of Unrelenting Agony", character: mischi, level: 410, wowhead_id: "", received_on: Date.new(2012, 4, 30), equipped: false},
+{name: "Leggings of the Corrupted Conquerer", level: 410, character: kakana, wowhead_id: "", received_on: Date.new(2012, 4, 30), equipped: true},
+{name: "Gauntlets of the Corrupted Vanquisher", character: felania, level: 410, wowhead_id: "", received_on: Date.new(2012, 4, 30), equipped: true},
+{name: "Seal of the Seven Signs", level: 410, character: keljahl, wowhead_id: "", received_on: Date.new(2012, 4, 30), equipped: true},
+{name: "Lightning Rod", level: 410, character: voltec, wowhead_id: "", received_on: Date.new(2012, 4, 30), equipped: true},
+{name: "Shoulders of the Corrupted Protector", level: 410, character: clete, wowhead_id: "", received_on: Date.new(2012, 4, 30), equipped: true},
+{name: "Curled Twilight Claw", level: 410, character: valarian, wowhead_id: "", received_on: Date.new(2012, 4, 30), equipped: true},
+{name: "Chest of the Corrupted Protector", level: 410, character: clete, wowhead_id: "", received_on: Date.new(2012, 4, 30), equipped: true},
+{name: "Eye of Unmaking", level: 397, character: felania, wowhead_id: "", received_on: Date.new(2012, 4, 30), equipped: false},
+{name: "Gauntlets of the Golden Thorn", level: 397, wowhead_id: "", received_on: Date.new(2012, 4, 30), equipped: false, disenchanted: true},
+{name: "Blackhorn's Mighty Bulwark", level: 397, character: valarian, wowhead_id: "", received_on: Date.new(2012, 4, 30), equipped: false},
+{name: "Gurthalak, Voice of the Deeps", level: 397, wowhead_id: "", received_on: Date.new(2012, 4, 30), equipped: false, disenchanted: true},
+{name: "Rathrak, the Poisonous Mind", level: 397, wowhead_id: "", received_on: Date.new(2012, 4, 30), equipped: false, disenchanted: true},
+{name: "Crown of the Corrupted Conquerer", level: 397, character: relaeha, wowhead_id: "", received_on: Date.new(2012, 4, 30), equipped: false}
+].each do |i|
+  create_and_equip_for_character(i, i[:character])
+end
+
+
+# Clete
 [
   {name: "Wyrmstalker's Headguard", :level => 397, :equipped => true },
   {name: "Cameo of Terrible Memories", :level => 397, :equipped => true},
-  {name: "Wyrmstalker's Spaulders", :level => 397, :equipped => true},
+  {name: "Wyrmstalker's Spaulders", :level => 397, :equipped => false},
   {name: "Batwing Cloak", :level => 397, :equipped => true},
-  {name: "Wyrmstalker's Tunic", :level => 410, :equipped => true},
+  {name: "Wyrmstalker's Tunic", :level => 410, :equipped => false},
   {name: "Bracers of Looming Darkness", :level => 410, :wowhead_id => "78430", :equipped => true},
   {name: "Sporebeard Gauntlets", :level => 410, :equipped => true},
   {name: "Belt of the Beloved Companion", :level => 397, :equipped => true},
@@ -40,7 +90,7 @@ clete = Character.create({name: "Clete", clazz: "Hunter"})
     create_and_equip_for_character(i, clete)
   end
 
-ganvil = Character.create({name: "Ganvil", clazz: "Shaman"})
+# Ganvil
 [
   {name: "Spiritwalker's Facegard", :level => 397, :equipped => true},
   {name: "Petrified Fungal Heart", :level => 384, :equipped => true},
@@ -68,7 +118,7 @@ ganvil = Character.create({name: "Ganvil", clazz: "Shaman"})
     create_and_equip_for_character(i, ganvil)
   end
 
-kakana = Character.create({name: "Kakana", clazz: "Priest"})
+# Kakana
 [
   {:name => "Cowl of Dying Light", :level => 397, :equipped => true},
   {:name => "Petrified Fungal Heart", :level => 410, :wowhead_id => "78364", received_on: Date.new(2012, 4, 22), :equipped => true},
@@ -78,7 +128,7 @@ kakana = Character.create({name: "Kakana", clazz: "Priest"})
   {:name => "Dreamwraps of the Light", :level => 397, :equipped => true},
   {:name => "Handwraps of Dying Light", :level => 410, :equipped => true},
   {:name => "Cord of the Slain Champion", :level => 397, :equipped => true},
-  {:name => "Leggings of Dying Light", :level => 397, :equipped => true},
+  {:name => "Leggings of Dying Light", :level => 397, :equipped => false},
   {:name => "Janglespur Jackboots", :level => 397, :wowhead_id => "78449", :equipped => true},
   {:name => "Ring of the Riven", :level => 397, :equipped => true},
   {:name => "Band of Reconstruction", :level => 397, :equipped => true},
@@ -93,7 +143,7 @@ kakana = Character.create({name: "Kakana", clazz: "Priest"})
     create_and_equip_for_character(i, kakana)
   end
 
-kazuhiro = Character.create({name: "Kazuhiro", clazz: "Warrior"})
+#kazuhiro
 [
   {:name => "Colossal Dragonplate Faceguard", :level => 397, :equipped => true},
   {:name => "Guardspike Choker", :level => 397, :equipped => true},
@@ -122,7 +172,7 @@ kazuhiro = Character.create({name: "Kazuhiro", clazz: "Warrior"})
     create_and_equip_for_character(i, kazuhiro)
   end
 
-keljahl = Character.create({name: "Keljahl", clazz: "Priest"})
+  # keljahl
 [
   {:name => "Cowl of Dying Light", :level => 397, :equipped => true},
   {:name => "Petrified Fungal Heart", :level => 397, :equipped => true},
@@ -136,7 +186,7 @@ keljahl = Character.create({name: "Keljahl", clazz: "Priest"})
   {:name => "Splinterfoot Sandals", :level => 397, :equipped => true},
   {:name => "Soothing Brimstone Circle", :level => 378, :equipped => true},
   {:name => "Band of Reconstruction", :level => 397, :equipped => true},
-  {:name => "Seal of the Seven Signs", :level => 384, :equipped => true},
+  {:name => "Seal of the Seven Signs", :level => 384, :equipped => false},
   {:name => "Jas of Defeat", :level => 391, :equipped => true},
   {:name => "Maw of the Dragonlord", :level => 403, :equipped => true},
   {:name => "Goblet of Anger", :level => 391, :wowhead_id => "71448", :equipped => true, :received_on => Date.new(2012, 4, 9)},
@@ -148,8 +198,8 @@ keljahl = Character.create({name: "Keljahl", clazz: "Priest"})
 ].each do |i|
     create_and_equip_for_character(i, keljahl)
   end
-  
-mischi = Character.create({name: "Mischi", clazz: "Mage"})
+
+# Mischi
 [
   {:name => "Time Lord's Hood", :level => 397, :equipped => true},
   {:name => "Opal of the Secret Order", :level => 397, :equipped => true},
@@ -174,7 +224,7 @@ mischi = Character.create({name: "Mischi", clazz: "Mage"})
     create_and_equip_for_character(i, mischi)
   end
 
-thundersnow = Character.create({name: "Thundersnow", clazz: "Mage"})
+  # Thundersnow
 [
   {:name => "Time Lord's Hood", :level => 397, :equipped => true},
   {:name => "Flowform Choker", :level => 378, :equipped => true},
@@ -196,7 +246,7 @@ thundersnow = Character.create({name: "Thundersnow", clazz: "Mage"})
     create_and_equip_for_character(i, thundersnow)
   end
 
-urielle = Character.create({name: "Urielle", clazz: "Rogue"})
+# Urielle
 [
   {:name => "Blackfang Battleweave Helmet", :level => 397, :equipped => true},
   {:name => "Cameo of Terrible Memories", :level => 397, :equipped => true},
@@ -221,7 +271,7 @@ urielle = Character.create({name: "Urielle", clazz: "Rogue"})
     create_and_equip_for_character(i, urielle)
   end
 
-valarian = Character.create({name: "Valarian", clazz: "Paladin"})
+# Valarian
 [
   {:name => "Helmet of Radiant Glory", :level => 397, :equipped => true},
   {:name => "Necklace of Black Dragon's Teeth", :level => 397, :equipped => true},
@@ -234,7 +284,7 @@ valarian = Character.create({name: "Valarian", clazz: "Paladin"})
   {:name => "Legplates of Radiant Glory", :level => 410, :equipped => true},
   {:name => "Treads of Crushed Flesh", :level => 397, :equipped => true},
   {:name => "Ring of Torn Flesh", :level => 397, :equipped => true},
-  {:name => "Curled Twilight Claw", :level => 397, :equipped => true},
+  {:name => "Curled Twilight Claw", :level => 397, :equipped => false},
   {:name => "Bone-Link Fetish", :level => 397, :equipped => true},
   {:name => "Eye of Unmaking", :level => 403, :equipped => true},
   {:name => "Gutripper Shard", :level => 397, :equipped => true},
@@ -246,7 +296,7 @@ valarian = Character.create({name: "Valarian", clazz: "Paladin"})
     create_and_equip_for_character(i, valarian)
   end
 
-virtual = Character.create({name: "Virtual", clazz: "Paladin"})
+# Virtual
 [
   {name: "Faceguard of Radiant Glory", :level => 397, :equipped => true},
   {name: "Guardspike Choker", :level => 397, :equipped => true},
@@ -274,7 +324,7 @@ virtual = Character.create({name: "Virtual", clazz: "Paladin"})
     create_and_equip_for_character(i, virtual)
   end
 
-felania = Character.create({name: "Felania", clazz: "Death Knight"})
+# Felania
 [
   {name: "Necrotic Boneplate Faceguard", level: 397, equipped: true },
   {name: "Guardspike Choker", level: 397, equipped: true },
@@ -282,7 +332,7 @@ felania = Character.create({name: "Felania", clazz: "Death Knight"})
   {name: "Indefatigable Greatcloak", level: 397, equipped: true },
   {name: "Necrotic Boneplate Chestguard", level: 397, equipped: true },
   {name: "Titanguard Wristplates", level: 397, equipped: true },
-  {name: "Necrotic Boneplate Handguards", level: 397, equipped: true },
+  {name: "Necrotic Boneplate Handguards", level: 397, equipped: false },
   {name: "Goriona's Collar", level: 397, equipped: true },
   {name: "Foundations of Courage", level: 397, equipped: true },
   {name: "Bladeshatter Treads", level: 397, equipped: true },
