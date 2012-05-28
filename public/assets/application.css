@@ -1,0 +1,27 @@
+body{margin:0;padding-bottom:0px;padding-top:0px;font-size:16pt;}
+.sidebar-nav-fixed{padding:9px 0;position:fixed;left:0px;top:0px;width:250px;}
+.row-fluid>.span-fixed-sidebar{margin-left:251px;}
+.main{-webkit-box-shadow:-5px -1px 10px #efefef;}
+.main .wrapper{padding:.8em;}
+.sidebar ul li:nth-child(odd){background:#113A5E;}
+.sidebar ul{position:relative;margin:0;padding:0;overflow-x:hidden;overflow-y:scroll;list-style:none;}
+.sidebar ul li{position:relative;background-color:#112A44;font-size:18px;border-bottom:1px solid white;-webkit-border-top-right-radius:5px;-webkit-border-bottom-right-radius:5px;-moz-border-radius-topright:5px;-moz-border-radius-bottomright:5px;border-top-right-radius:5px;border-bottom-right-radius:5px;}
+.sidebar ul li a{padding:16px;display:block;}
+.sidebar ul li.active{background-color:#08C;-webkit-border-top-right-radius:5px;-webkit-border-bottom-right-radius:5px;-moz-border-radius-topright:5px;-moz-border-radius-bottomright:5px;border-top-right-radius:5px;border-bottom-right-radius:5px;}
+.sidebar ul li.active a{color:#fff;font-weight:bold;}
+ul.list{position:relative;margin:0;padding:0;overflow-x:hidden;overflow-y:scroll;list-style:none;}
+ul.list li{position:relative;color:#efefef;z-index:2;display:list-item;}
+ul.list li a{padding:10px 0;display:block;}
+a.heroic{font-weight:bold;color:purple;}
+.death_knight a:link,.death_knight a:visited{color:#C41F3B;}
+.druid a:link,.druid a:visited{color:#FF7D0A;}
+.hunter a:link,.hunter a:visited{color:#ABD473;}
+.mage a:link,.mage a:visited{color:#69CCF0;}
+.monk a:link,.monk a:visited{color:#558A84;}
+.paladin a:link,.paladin a:visited{color:#F58CBA;}
+.priest a:link,.priest a:visited{color:#FFFFFF;}
+.rogue a:link,.rogue a:visited{color:#FFF569;}
+.shaman a:link,.shaman a:visited{color:#0070DE;}
+.warlock a:link,.warlock a:visited{color:#9482C9;}
+.warrior a:link,.warrior a:visited{color:#C79C6E;}
+.loot-card{width:210px;min-height:65px;border:1px solid #ccc;-webkit-border-radius:4px;padding:5px;margin:5px;background-color:#efefef;}
