@@ -9,7 +9,7 @@ require 'date'
 
 def create_and_equip_for_character(i, character)
     item = Item.find_by_name_and_level(i[:name], i[:level]) 
-    item = Item.create({name: i[:name], level: i[:level], :wowhead_id => i[:wowhead_id]}) if item.nil?
+    item = Item.create({name: i[:name], slot: i[:slot], level: i[:level], :wowhead_id => i[:wowhead_id]}) if item.nil?
     i[:main] = true if i[:main].nil?
     loot = Loot.new({character: character, item: item, equipped: i[:equipped], received_on: i[:received_on], main: i[:main]})
     loot.save if loot.valid?
@@ -19,8 +19,8 @@ morchok = Boss.create({name: "Morchok"})
 morchok.items.create({name: "Bone-Link Fetish", level: 397, wowhead_id: "77210"})
 morchok.items.create({name: "Bone-Link Fetish", level: 410, wowhead_id: "78002"})
 
-morchok.items.create({name: "Brackenshell Shoulderplates", level: 397, wowhead_id: "77268", slot: "Shoulder", type: "Plate"})
-morchok.items.create({name: "Brackenshell Shoulderplates", level: 410, wowhead_id: "78367", slot: "Shoulder", type: "Plate"})
+morchok.items.create({name: "Brackenshell Shoulderplates", level: 397, wowhead_id: "77268", slot: "Shoulder", item_type: "Plate"})
+morchok.items.create({name: "Brackenshell Shoulderplates", level: 410, wowhead_id: "78367", slot: "Shoulder", item_type: "Plate"})
 
 
 morchok.items.create({name: "Petrified Fungal Heart", level: 397, wowhead_id: "77262"})
@@ -156,7 +156,7 @@ end
   {:name => "Colossal Dragonplate Legguards", :level => 410, :equipped => true},
   {:name => "Bladeshatter Treads", :level => 397, :equipped => true},
   {:name => "Signet of the Resolute", :level => 397, :equipped => true},
-  {:name => "Adamantine Signet of the Avengers", :level => 391, :equipped => true},
+  {:name => "Adamantine Signet of the Avengers", :level => 391, :equipped => true, :slot => :finger},
   {:name => "Soulshifter Vortex", :level => 410, :equipped => true},
   {:name => "Indomitable Pride", :level => 410, :equipped => true},
   {:name => "Hand of Morchok", :level => 410, :equipped => true},
@@ -309,7 +309,7 @@ end
   {name: "Legguards of Radiant Glory", :level => 410, :equipped => true},
   {name: "Bladeshatter Treads", :level => 397, :equipped => true},
   {name: "Signet of the Resolute", :level => 397, :equipped => true},
-  {name: "Adamantine Signet of the Avengers", :level => 391, :equipped => true},
+  {name: "Adamantine Signet of the Avengers", :level => 391, :equipped => true, :slot => :finger},
   {name: "Indomitable Pride", :level => 397, :equipped => true},
   {name: "Soulshifter Vortex", :level => 410, :equipped => true},
   {name: "Hand of Morchok", :level => 410, :equipped => true},

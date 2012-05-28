@@ -31,4 +31,11 @@ describe Item do
     
     item2.should be_valid
   end
+  
+  it "should belong to a specific slot" do
+    head_slot = Slot.new(:name => "Head")
+    item = Item.create(:name => "Item 1", :slot => head_slot)
+    
+    item.slot.should == "Head"
+  end
 end

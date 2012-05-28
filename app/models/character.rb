@@ -1,13 +1,23 @@
+require 'pp'
+
 class Character < ActiveRecord::Base
-  attr_accessible :name, :clazz, :main
+  attr_accessible :name, :clazz, :main, :items, :equipped_items
   
   has_many :loots
   has_many :items, :through => :loots
   has_many :equipped_items, :through => :loots, :class_name => "Item", :conditions => { :loots => {:equipped => true, :main => true} }, :source => :item
   
+  def equip_item(attributes)
+    item = equipped_items.build attributes
+  end
+  
   def gear_level
     return 0 if equipped_items.empty?
     (sum_equipped_items / equipped_items.size).round(2)
+  end
+  
+  def free_slot_for?(slot)
+    equipped_items.empty? || equipped_items.any? { |item| item.slot == slot }
   end
   
   def css_color_code

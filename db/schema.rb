@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120501135835) do
+ActiveRecord::Schema.define(:version => 20120524155417) do
 
   create_table "bosses", :force => true do |t|
     t.string   "name"
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(:version => 20120501135835) do
     t.integer  "level"
     t.string   "dropped_by"
     t.string   "slot"
-    t.string   "type"
+    t.string   "item_type"
     t.integer  "wowhead_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -56,6 +56,12 @@ ActiveRecord::Schema.define(:version => 20120501135835) do
     t.date     "received_on"
     t.datetime "created_at",                      :null => false
     t.datetime "updated_at",                      :null => false
+  end
+
+  create_table "slots", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end

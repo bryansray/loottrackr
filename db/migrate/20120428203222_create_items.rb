@@ -4,8 +4,10 @@ class CreateItems < ActiveRecord::Migration
       t.string :name
       t.integer :level
       t.string :dropped_by
-      t.string :slot, :type
+      t.string :slot, :item_type
       t.integer :wowhead_id
+      
+      # t.references :slot
 
       t.timestamps
     end
