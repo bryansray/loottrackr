@@ -1,6 +1,10 @@
 <div id="gear-level-chart" class="gear-level-chart">&nbsp;
 </div>
 
+<%= form_for @character do |f| %>
+	<%= f.submit "Update Character"%>
+<% end %>
+
 <div class="recent-loot pull-left">
 	<h3>Recent Loot</h3>
 	<ul>
@@ -40,7 +44,7 @@ $(document).ready(function() {
         },
         
         series: [{
-            data: [391, 394, 399, 401, null, null, null, null, null, null, null, null]
+            data: [391, 394, 399, 401, 401, 401, <%= @character.equipped_item_level || 0 %>, null, null, null, null, null]
         }]
     });
 });

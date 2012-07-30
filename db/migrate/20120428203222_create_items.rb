@@ -6,6 +6,7 @@ class CreateItems < ActiveRecord::Migration
       t.string :dropped_by
       t.string :slot, :item_type
       t.integer :wowhead_id
+      t.integer :armory_id
       
       # t.references :slot
 

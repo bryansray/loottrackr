@@ -23,9 +23,11 @@ ActiveRecord::Schema.define(:version => 20120524155417) do
     t.string   "name"
     t.string   "description"
     t.string   "clazz"
-    t.boolean  "main",        :default => true
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.boolean  "main",                :default => true
+    t.integer  "item_level"
+    t.integer  "equipped_item_level"
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
   end
 
   create_table "drops", :force => true do |t|
@@ -43,6 +45,7 @@ ActiveRecord::Schema.define(:version => 20120524155417) do
     t.string   "slot"
     t.string   "item_type"
     t.integer  "wowhead_id"
+    t.integer  "armory_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

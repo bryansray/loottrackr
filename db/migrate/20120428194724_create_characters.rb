@@ -5,6 +5,7 @@ class CreateCharacters < ActiveRecord::Migration
       t.string :clazz
       t.boolean :main, :default => true
       
+      t.integer :item_level, :equipped_item_level
       t.timestamps
     end
   end
