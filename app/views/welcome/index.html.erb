@@ -110,7 +110,7 @@ $(document).ready(function() {
 				series: [{
 				data: [
 				<% @characters.each do |c| %>
-				{ name: "<%= c.name %>", color: "<%= c.css_color_code %>", y:  <%= c.gear_level %> },
+				{ name: "<%= c.name %>", color: "<%= c.css_color_code %>", y:  <%= c.equipped_item_level %> },
 				<% end %>
 				]
 			}]
