@@ -34,19 +34,64 @@ require 'date'
 # spine = Boss.create({name: "Spine of Deathwing"})
 # madness = Boss.create({name: "Madness of Deathwing"})
 
-clete = Character.create({name: "Clete", clazz: "Hunter"})
-ganvil = Character.create({name: "Ganvil", clazz: "Shaman"})
-kakana = Character.create({name: "Kakana", clazz: "Priest"})
-kazuhiro = Character.create({name: "Kazuhiro", clazz: "Warrior"})
-keljahl = Character.create({name: "Keljahl", clazz: "Priest"})
-mischi = Character.create({name: "Mischi", clazz: "Mage"})
-thundersnow = Character.create({name: "Thundersnow", clazz: "Mage"})
-urielle = Character.create({name: "Urielle", clazz: "Rogue"})
-valarian = Character.create({name: "Valarian", clazz: "Paladin"})
-virtual = Character.create({name: "Virtual", clazz: "Paladin"})
-felania = Character.create({name: "Felania", clazz: "Death Knight"})
-voltec = Character.create({name: "Voltec", clazz: "Mage", main: false})
-relaeha = Character.create({name: "Relaeha", clazz: "Priest", main: false})
+
+
+
+Character.create({name: "Virtualize", server: "Greymane", clazz: "Warlock"})
+Character.create({name: "Wárlockone", server: "Greymane", clazz: "Warlock"})
+Character.create({name: "Nemba", server: "Greymane", clazz: "Warlock"})
+Character.create({name: "Thaleiah", server: "Greymane", clazz: "Warlock"})
+
+Character.create({name: "Khatian", server: "Greymane", clazz: "Hunter"})
+Character.create({name: "Silvrbow", server: "Greymane", clazz: "Hunter"})
+Character.create({name: "Gilthandir", server: "Greymane", clazz: "Hunter"})
+
+Character.create({name: "Mikalya", server: "Greymane", clazz: "Priest"})
+Character.create({name: "Eristus", server: "Greymane", clazz: "Priest"})
+Character.create({name: "Yougibear", server: "Greymane", clazz: "Priest"})
+
+Character.create({name: "Antics", server: "Greymane", clazz: "Death Knight"})
+Character.create({name: "Misanth", server: "Greymane", clazz: "Death Knight"})
+Character.create({name: "Xert", server: "Greymane", clazz: "Death Knight"})
+
+Character.create({name: "Jeyo", server: "Greymane", clazz: "Mage"})
+Character.create({name: "Houdinii", server: "Greymane", clazz: "Mage"})
+Character.create({name: "Huxtable", server: "Greymane", clazz: "Mage"})
+
+Character.create({name: "Cassabry", server: "Greymane", clazz: "Paladin"})
+Character.create({name: "Kelity", server: "Greymane", clazz: "Paladin"})
+Character.create({name: "Denkitiki", server: "Greymane", clazz: "Paladin"})
+
+Character.create({name: "Caffino", server: "Greymane", clazz: "Rogue"})
+Character.create({name: "Shankmasta", server: "Greymane", clazz: "Rogue"})
+Character.create({name: "Alauren", server: "Greymane", clazz: "Rogue"})
+
+Character.create({name: "Renost", server: "Greymane", clazz: "Warrior"})
+Character.create({name: "Ryzor", server: "Greymane", clazz: "Warrior"})
+
+Character.create({name: "Biotics", server: "Greymane", clazz: "Shaman"})
+Character.create({name: "Tikiman", server: "Greymane", clazz: "Shaman"})
+Character.create({name: "Totemrecal", server: "Greymane", clazz: "Shaman"})
+
+Character.create({name: "Runelin", server: "Greymane", clazz: "Druid"})
+Character.create({name: "Mystidruid", server: "Greymane", clazz: "Druid"})
+Character.create({name: "Restoskills", server: "Greymane", clazz: "Druid"})
+
+Character.create({name: "Ooey", server: "Greymane", clazz: "Monk"})
+
+# clete = Character.create({name: "Clete", clazz: "Hunter"})
+# ganvil = Character.create({name: "Ganvil", clazz: "Shaman"})
+# kakana = Character.create({name: "Kakana", clazz: "Priest"})
+# kazuhiro = Character.create({name: "Kazuhiro", clazz: "Warrior"})
+# keljahl = Character.create({name: "Keljahl", clazz: "Priest"})
+# mischi = Character.create({name: "Mischi", clazz: "Mage"})
+# thundersnow = Character.create({name: "Thundersnow", clazz: "Mage"})
+# urielle = Character.create({name: "Urielle", clazz: "Rogue"})
+# valarian = Character.create({name: "Valarian", clazz: "Paladin"})
+# virtual = Character.create({name: "Virtual", clazz: "Paladin"})
+# felania = Character.create({name: "Felania", clazz: "Death Knight"})
+# voltec = Character.create({name: "Voltec", clazz: "Mage", main: false})
+# relaeha = Character.create({name: "Relaeha", clazz: "Priest", main: false})
 
 # [{name: "Razor Saronite Chip", level: 410, wowhead_id: "78369", disenchanted: true, received_on: Date.new(2012, 4, 29), equipped: false},
 # {name: "Scalpel of Unrelenting Agony", character: mischi, level: 410, wowhead_id: "", received_on: Date.new(2012, 4, 30), equipped: false},

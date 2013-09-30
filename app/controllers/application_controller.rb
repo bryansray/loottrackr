@@ -4,6 +4,6 @@ class ApplicationController < ActionController::Base
   before_filter :get_characters
 
   def get_characters
-    @characters = Character.where(:main => true).order("name")
+    @characters = Character.where(:main => true).order("clazz,name")
   end
 end

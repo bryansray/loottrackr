@@ -1,4 +1,3 @@
-<div id="loot-chart">Chart</div>
 <div id="gear-level-chart">Chart</div>
 
 <h3>Recent Loot</h3>
@@ -19,81 +18,39 @@
 
 <script>
 $(document).ready(function() {
-	// var chart = new Highcharts.Chart({
-	// 		chart: {
-	// 			renderTo: 'loot-chart',
-	// 			plotBackgroundColor: null,
-	// 			plotBorderWidth: null,
-	// 			plotShadow: false
-	// 		},
-	// 		title: {
-	// 			text: 'Loot Distribution by Type'
-	// 		},
-	// 		tooltip: {
-	// 			formatter: function() {
-	// 				return '<b>'+ this.point.name +'</b>: '+ this.y +' items';
-	// 			}
-	// 		},
-	// 		plotOptions: {
-	// 			pie: {
-	// 				allowPointSelect: true,
-	// 				cursor: 'pointer',
-	// 				dataLabels: {
-	// 					enabled: true,
-	// 					color: '#000000',
-	// 					connectorColor: '#000000',
-	// 					formatter: function() {
-	// 						return '<b>'+ this.point.name +'</b>: '+ Math.round(this.percentage) +' %';
-	// 					}
-	// 				}
-	// 			}
-	// 		},
-	// 		series: [{
-	// 			type: 'pie',
-	// 			name: 'Loot Type',
-	// 			data: [
-	// 				['Mail',   5.0],
-	// 				['Plate', 3.0],
-	// 				{
-	// 					name: 'Leather',
-	// 					y: 3.0,
-	// 					sliced: true,
-	// 					selected: true
-	// 				},
-	// 				['Cloth', 2.0],
-	// 				// ['Tier', 12.0],
-	// 				// ['Weapon', 6.0],
-	// 				// ['Other',   8.0]
-	// 			]
-	// 		}]
-	// 	});
-
 	var chart2 = new Highcharts.Chart({
 			chart: {
 				renderTo: 'gear-level-chart',
-				type: 'column'
+				type: 'column',
 			},
+			credits: { enabled: false },
 			title: {
-				text: 'Average Gear Score'
+				text: 'Average Equipped Item Level'
 			},
 			xAxis: {
-				categories: <%=raw @characters.map{ |c| c.name } %>
-			},
-			yAxis: {
-				min: <%= @characters.map{ |c| c.gear_level }.min - 3 %>,
-				title: {
-					text: 'Average Gear Score'
+				categories: <%=raw @characters.map{ |c| c.name } %>,
+				title: { text: 'Character' },
+				labels: {
+					rotation: -45,
+					x: 5,
+					y: 10,
+					align: "right"
 				}
 			},
-			legend: {
-				layout: 'vertical',
-				backgroundColor: '#FFFFFF',
-				align: 'left',
-				verticalAlign: 'top',
-				x: 100,
-				y: 70,
-				floating: true,
-				shadow: true
+			yAxis: {
+				min: <%= @average_item_level %>,
+				max: <%= @characters.map{ |c| c.gear_level }.max + 5 %>,
+				title: {
+					text: 'Average'
+				},
+				minorTickInterval: 'auto',
+				stackLabels: {
+					enabled: true,
+					style: { 
+						fontWeight: 'bold',
+						color: 'gray'
+					}
+				}
 			},
 			tooltip: {
 				formatter: function() {
@@ -102,19 +59,26 @@ $(document).ready(function() {
 				}
 			},
 			plotOptions: {
+				bar: {
+					borderWidth: 1,
+					pointWidth: 20
+				},
 				column: {
-					pointPadding: 0.2,
-					borderWidth: 0
+					pointWidth: 15,
+					dataLabels: { enabled: false }
 				}
 			},
-				series: [{
+			legend: { enabled: false },
+			series: [{
 				data: [
-				<% @characters.each do |c| %>
-				{ name: "<%= c.name %>", color: "<%= c.css_color_code %>", y:  <%= c.equipped_item_level %> },
-				<% end %>
+					<% @characters.each do |c| %>
+						{ name: "<%= c.name %>", color: "<%= c.css_color_code %>", y:  <%= c.item_level %> },
+					<% end %>
 				]
 			}]
 		});
+		
+		chart2.setSize()
 	
 });
 </script>

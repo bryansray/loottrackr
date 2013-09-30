@@ -1,7 +1,15 @@
---- 
-rails.png: rails-be8732dac73d845ac5b142c8fb5f9fb0.png
-application.js: application-e27556ce27cb9afeda22e7f488133b0e.js
-application.css: application-d62a89f737e19996d983a34023500ff8.css
-bootstrap.css: bootstrap-5d95aaf9ca94c8861c223e9dbe1e0c75.css
-twitter/bootstrap/glyphicons-halflings-white.png: twitter/bootstrap/glyphicons-halflings-white-13553a5bf21ae3cc374006592488ec64.png
-twitter/bootstrap/glyphicons-halflings.png: twitter/bootstrap/glyphicons-halflings-f6675c325532ec11a984d58e172b8e2a.png
+---
+rails.png: rails.png
+rails/index.png: rails.png
+application.js: application.js
+application/index.js: application.js
+application.css: application.css
+application/index.css: application.css
+twitter/bootstrap/glyphicons-halflings-regular.eot: twitter/bootstrap/glyphicons-halflings-regular.eot
+twitter/bootstrap/glyphicons-halflings-regular/index.eot: twitter/bootstrap/glyphicons-halflings-regular.eot
+twitter/bootstrap/glyphicons-halflings-regular.svg: twitter/bootstrap/glyphicons-halflings-regular.svg
+twitter/bootstrap/glyphicons-halflings-regular/index.svg: twitter/bootstrap/glyphicons-halflings-regular.svg
+twitter/bootstrap/glyphicons-halflings-regular.ttf: twitter/bootstrap/glyphicons-halflings-regular.ttf
+twitter/bootstrap/glyphicons-halflings-regular/index.ttf: twitter/bootstrap/glyphicons-halflings-regular.ttf
+twitter/bootstrap/glyphicons-halflings-regular.woff: twitter/bootstrap/glyphicons-halflings-regular.woff
+twitter/bootstrap/glyphicons-halflings-regular/index.woff: twitter/bootstrap/glyphicons-halflings-regular.woff

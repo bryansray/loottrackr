@@ -1,6 +1,12 @@
 <div id="gear-level-chart" class="gear-level-chart">&nbsp;
 </div>
 
+<h2><span class="<%= @character.clazz.gsub(/\s+/, "").underscore %>"><%= @character.name %></span> - <span><%= @character.item_level%></span> (<%= @character.equipped_item_level %>)</span></h2>
+
+<div>Last updated <%= time_ago_in_words(@character.updated_at) %>
+	
+<hr/>
+
 <%= form_for @character do |f| %>
 	<%= f.submit "Update Character"%>
 <% end %>
@@ -10,9 +16,9 @@
 	<ul>
 		<% @recent_loot.each do |loot| %>
 		<li>
-			<%= link_to loot.item.name, item_path(loot.item), :rel => "item=#{loot.item.wowhead_id}", :class => loot_styles(loot.item) %>
+			<%= link_to loot.item.name, loot_path(loot), :rel => "item=#{loot.item.armory_id}", :class => loot_styles(loot.item) %>
 			<% if !loot.received_on.nil? %> 
-				received on <%= loot.received_on.strftime("%B %d, %Y") %>
+				received on <%= loot.received_on_formatted %>
 			<% end %>
 		</li>
 		<% end%>
@@ -23,30 +29,29 @@
 	<h3>Equipped Items</h3>
 	<ul>
 		<% @character.equipped_items.each do |item| %>
-		<li><%= link_to item.name, item_path(item), :rel => "item=#{item.wowhead_id}", :class => loot_styles(item) %> (<%= item.level %>)</li>
+		<li><%= link_to item.name, item_path(item), :rel => "item=#{item.armory_id}", :class => loot_styles(item) %> (<%= item.level %>) - <%= item.slot %></li>
 		<% end %>
 	</ul>
 </div>
 
 <script>
-$(document).ready(function() {
-    var chart = new Highcharts.Chart({
-        chart: {
-            renderTo: 'gear-level-chart',
-            type: 'line',
-            width: 800
-        },
-		
-		title: { text: "Gear Progression" },
-        
-        xAxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-        },
-        
-        series: [{
-            data: [391, 394, 399, 401, 401, 401, <%= @character.equipped_item_level || 0 %>, null, null, null, null, null]
-        }]
-    });
-});
-
+// $(document).ready(function() {
+//     var chart = new Highcharts.Chart({
+//         chart: {
+//             renderTo: 'gear-level-chart',
+//             type: 'line',
+//             width: 800
+//         },
+// 		
+// 		title: { text: "Gear Progression" },
+//         
+//         xAxis: {
+//             categories: ['Sep', 'Oct', 'Nov', 'Dec']
+//         },
+//         
+//         series: [{
+//             data: [<%= @character.equipped_item_level || 0 %>]
+//         }]
+//     });
+// });
 </script>

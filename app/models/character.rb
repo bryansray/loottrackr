@@ -1,7 +1,7 @@
 require 'pp'
 
 class Character < ActiveRecord::Base
-  attr_accessible :name, :clazz, :main, :items, :equipped_items, :item_level, :equipped_item_level
+  attr_accessible :name, :server, :clazz, :main, :items, :equipped_items, :item_level, :equipped_item_level
   
   has_many :loots
   has_many :items, :through => :loots

@@ -9,6 +9,13 @@ class LootsController < ApplicationController
     @main_characters = @characters.order(:name).map { |c| [c.name, c.id] }
   end
   
+  def show
+    @loot = Loot.find(params[:id])
+    # @characters_looted = Character.joins(:loots).where("loots.item_id = ? and loots.character_id != ?", @loot.item.id, @loot.character.id)
+    @loots = Loot.where("item_id = ? and character_id != ?", @loot.item.id, @loot.character.id)
+    pp @characters
+  end
+  
   def create
     params[:loot][:received_on] = Chronic.parse(params[:loot][:received_on])
 

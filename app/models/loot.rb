@@ -5,4 +5,8 @@ class Loot < ActiveRecord::Base
   belongs_to :item
   
   scope :equipped, where(:equipped => true)
+  
+  def received_on_formatted
+    received_on.strftime("%B %d, %Y")
+  end
 end
