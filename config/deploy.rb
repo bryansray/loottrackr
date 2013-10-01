@@ -37,6 +37,6 @@ namespace :deploy do
   DESC
   
   task :link_dependencies, :roles => :app do
-    run "ln -nfs #{shared_path}/public/cache #{release_path}/public/cache"
+    run "ln -nfs #{shared_path}/cache #{release_path}/public/cache"
   end
 end
