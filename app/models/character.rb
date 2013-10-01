@@ -35,6 +35,10 @@ class Character < ActiveRecord::Base
     return "#C79C6E" if character_class == "warrior"
   end
   
+  def to_param
+    name
+  end
+  
   private
     def sum_equipped_items
       equipped_items.inject(0.0) { |result, item| result + item.level }

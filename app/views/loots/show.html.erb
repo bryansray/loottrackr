@@ -1,12 +1,20 @@
 <h2>Loot Information</h2>
 
 <div>Item: <%= link_to @loot.item.name, item_path(@loot.item) %></div>
-<div>Looted by <%= link_to @loot.character.name, character_path(@loot.character) %> on <%= @loot.received_on_formatted %>
+<div>Looted by <%= link_to @loot.character.name, character_path(@loot.character) %> on <%= @loot.received_on_formatted %></div>
+
+<% if @loot.is_manual_assignment? then %>
+	<div>This item was manually assigned to this character.</div>
+<% end %>
+	
+<%= link_to "Edit", edit_loot_path(@loot) %>
+
+<hr/>
 
 <% if @loots.size > 0 %>
-	<h3>Item has been looted by</h3>
+	<h3>Item has also been looted by</h3>
 
 	<% @loots.each do |loot| %>
-		<div><%= link_to loot.character.name, character_path(loot.character) %> on <%= loot.received_on_formatted %></div>
+		<div><%= link_to loot.character.name, loot_path(loot) %> on <%= loot.received_on_formatted %></div>
 	<% end %>
 <% end %>

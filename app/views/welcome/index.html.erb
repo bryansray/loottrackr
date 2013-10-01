@@ -1,19 +1,29 @@
 <div id="gear-level-chart">Chart</div>
 
-<h3>Recent Loot</h3>
-<div class="recent-loot">
-	<% @recent_loot.each do |loot| %>
-		<div class="loot-card pull-left">
-			<b><%= link_to loot.item.name, loot_path(loot) %></b> 
-			<% if !loot.character.nil? %> 
-			was received by <%= link_to loot.character.name, character_path(loot.character) %> 
-			on <%= loot.received_on.strftime("%m/%d/%Y") %>
-			<% else %>
-				was disenchanted
-			<% end %>
-		</div>
-	<% end %>
+<div class="recent-loot col-lg-8">
+	<div><strong>Recently Looted Items</strong> - <%= link_to "View All", loots_path %>
 
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Received By</th>
+				<th>Received Item</th>
+				<th>Received On</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+		<% @recent_loot.each_with_index do |loot, index| %>
+		<tr>
+			<td><%= index + 1 %></td>
+			<td><%= link_to loot.character.name, character_path(loot.character) %>
+			<td><%= link_to loot.item.name, loot_path(loot), :rel => "item=#{loot.item.armory_id}", :class => "quality-#{loot.item.quality.nil? ? 0 : loot.item.quality}" %></td>
+			<td><%= loot.received_on_formatted unless loot.received_on.nil? %>
+		</tr>
+		<% end%>
+		</tbody>
+	</table>
 </div>
 
 <script>

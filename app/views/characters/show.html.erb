@@ -1,5 +1,9 @@
-<div id="gear-level-chart" class="gear-level-chart">&nbsp;
+<div class="actions">
+	<%= form_for @character do |f| %>
+		<%= f.submit "Update Character", class: "btn btn-default btn-sm pull-right" %>
+	<% end %>
 </div>
+
 
 <h2><span class="<%= @character.clazz.gsub(/\s+/, "").underscore %>"><%= @character.name %></span> - <span><%= @character.item_level%></span> (<%= @character.equipped_item_level %>)</span></h2>
 
@@ -7,31 +11,49 @@
 	
 <hr/>
 
-<%= form_for @character do |f| %>
-	<%= f.submit "Update Character"%>
-<% end %>
+<div class="row">
+	<div class="recent-loot col-lg-6">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Received Item</th>
+					<th>Received On</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+			<% @recent_loot.each do |loot| %>
+			<tr>
+				<td><%= link_to loot.item.name, loot_path(loot), :rel => "item=#{loot.item.armory_id}", :class => "quality-#{loot.item.quality.nil? ? 0 : loot.item.quality}" %></td>
+				<td><%= loot.received_on_formatted unless loot.received_on.nil? %>
+			</tr>
+			<% end%>
+			</tbody>
+		</table>
+	</div>
 
-<div class="recent-loot pull-left">
-	<h3>Recent Loot</h3>
-	<ul>
-		<% @recent_loot.each do |loot| %>
-		<li>
-			<%= link_to loot.item.name, loot_path(loot), :rel => "item=#{loot.item.armory_id}", :class => loot_styles(loot.item) %>
-			<% if !loot.received_on.nil? %> 
-				received on <%= loot.received_on_formatted %>
-			<% end %>
-		</li>
-		<% end%>
-	</ul>
+	<div class="equipped-items col-lg-6">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Equipped Item</th>
+					<th>Slot</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @character.equipped_items.each do |item| %>
+				<tr>
+					<td><%= link_to item.name, item_path(item), :rel => "item=#{item.armory_id}", :class => "quality-#{item.quality.nil? ? 0 : item.quality}" %> (<%= item.level %>)</td>
+					<td><%= item.slot %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+	
 </div>
 
-<div class="equipped-items pull-left">
-	<h3>Equipped Items</h3>
-	<ul>
-		<% @character.equipped_items.each do |item| %>
-		<li><%= link_to item.name, item_path(item), :rel => "item=#{item.armory_id}", :class => loot_styles(item) %> (<%= item.level %>) - <%= item.slot %></li>
-		<% end %>
-	</ul>
+<div id="gear-level-chart" class="gear-level-chart">&nbsp;
 </div>
 
 <script>

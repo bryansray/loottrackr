@@ -13,9 +13,9 @@
 		<%= csrf_meta_tags %>
 	</head>
 	<body>
-		<div class="container-fluid">
-			<div class="row-fluid row">
-				<div class="span2 sidebar">
+
+			<div class="row">
+				<div class="col-md-2 sidebar">
 					<ul class="curl">
 						<li><%= link_to "Overview", root_path, :class => "brand" %></li>
 						<% @characters.each do |character| %>
@@ -23,14 +23,13 @@
 						<% end %>
 					</ul>
 				</div>
-				
-				<div class="span10 main" style="margin-left: 5px;">
+
+				<div class="col-md-10 main">
 					<div class="wrapper">
 						<%= yield %>
 					</div>
 				</div>
 			</div>
-		</div>
 		
 	</body>
 </html>

@@ -1,0 +1,35 @@
+<%= form_for @item, :html => { :class => "form-horizontal well span8", :role => "form" } do |f| %>
+	<div class="form-group">
+		<%= f.label(:name, class: "control-label col-lg-2")%>
+        <div class="col-lg-4">
+          <%= f.text_field(:name, :class => "form-control")%>
+        </div>
+	</div>
+	
+	<div class="form-group">
+		<%= f.label(:slot, class: "control-label col-lg-2")%>
+        <div class="col-lg-2">
+          <%= f.text_field(:slot, :class => "form-control")%>
+        </div>
+	</div>
+	
+	<div class="form-group">
+		<%= f.label(:item_type, class: "control-label col-lg-2")%>
+        <div class="col-lg-2">
+          <%= f.text_field(:item_type, :class => "form-control")%>
+        </div>
+	</div>
+	
+	<div class="form-group">
+		<%= f.label(:quality, class: "control-label col-lg-2")%>
+        <div class="col-lg-1">
+          <%= f.text_field(:quality, :class => "form-control")%>
+        </div>
+	</div>
+	
+	<div class="form-group">
+		<div class="col-lg-offset-2 col-lg-4">
+			<%= f.submit "Save", class: "btn btn-default" %>
+		</div>
+	</div>
+<% end %>

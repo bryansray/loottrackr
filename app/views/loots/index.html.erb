@@ -1,3 +1,24 @@
+<h2>Recently received loot</h2>
+
+<table class="table table-striped">
+	<thead>
+		<tr>		
+			<th>Item Name</th>
+			<th>Looted by</th>
+			<th>Received At</th>
+		</tr>	
+	</thead>
+	<tbody>
+		<% @loots.each do |loot| %>
+			<tr>
+				<td><%= link_to loot.item.name, loot_path(loot), class: "quality-#{loot.item.quality}"  unless loot.item.nil? %></td>
+				<td><%= link_to loot.character.name, character_path(loot.character) %></td>
+				<td><%= loot.received_on_formatted %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
 <% @bosses.each do |boss| %>
 	<h3><%= boss.name %></h3>
 	

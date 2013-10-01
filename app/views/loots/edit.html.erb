@@ -1,0 +1,11 @@
+<h2><%= @loot.item.name %></h2>
+
+<%= form_for @loot do |f| %>
+	<div>Looted by: <%= f.select :character_id, Character.order("name").all.collect { |p| [p.name, p.id] }, { include_blank: true }%></div>
+	<div>Received on <%= @loot.received_on_formatted %></div>
+	<div>Manual Assignment: <%= f.check_box :is_manual_assignment %></div>
+	
+	<br/>
+	
+	<div><%= link_to "Cancel", loot_path(@loot), :class => "btn" %> <%= f.submit "Save", class: "btn btn-primary" %></div>
+<% end %>

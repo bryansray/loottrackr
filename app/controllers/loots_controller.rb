@@ -1,6 +1,7 @@
 class LootsController < ApplicationController
   def index
     @bosses = Boss.all
+    @loots = Loot.limit(50).order("received_on DESC").all
   end
   
   def new
@@ -11,9 +12,20 @@ class LootsController < ApplicationController
   
   def show
     @loot = Loot.find(params[:id])
-    # @characters_looted = Character.joins(:loots).where("loots.item_id = ? and loots.character_id != ?", @loot.item.id, @loot.character.id)
-    @loots = Loot.where("item_id = ? and character_id != ?", @loot.item.id, @loot.character.id)
-    pp @characters
+    @loots = Loot.where("item_id = ? and character_id != ? and (is_manual_assignment = false or is_manual_assignment is null)", @loot.item.id, @loot.character.id)
+  end
+  
+  def edit
+    @loot = Loot.find(params[:id])
+  end
+  
+  def update
+    @loot = Loot.find(params[:id])
+    
+    @loot.is_manual_assignment = params[:loot][:is_manual_assignment]
+    @loot.update_attributes(params[:loot])
+        
+    redirect_to @loot
   end
   
   def create
@@ -24,13 +36,13 @@ class LootsController < ApplicationController
     currently_equipped = character.loots.includes(:item).where("items.slot = ?", item.slot	)
     
     @loot = Loot.new params[:loot]
-
     
-    if true # @loot.save
-	  currently_equipped.each do |loot|
-	  	loot.equipped = false
-	  	loot.save
-	  end
+    if @loot.save
+  	  currently_equipped.each do |loot|
+  	  	loot.equipped = false
+  	  	loot.save
+  	  end
+
       redirect_to new_loot_path
     else
 	  @items = Item.order(:name).map { |i| ["#{i.name} (#{i.level})", i.id] }

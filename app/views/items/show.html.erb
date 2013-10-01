@@ -1,9 +1,15 @@
+<div class="actions clearfix">
+	<%= form_for @item do |f| %>
+		<%= link_to "Edit", edit_item_path(@item), class: "btn btn-default btn-sm pull-right" %>
+	<% end %>
+</div>
+
 <h2><%= @item.name %></h2>
 
 <% if @loots.size > 0 %>
 	<h3>Also Looted By</h3>
 
 	<% @loots.each do |loot| %>
-		<div><%= link_to loot.character.name, character_path(loot.character) %> on <%= loot.received_on_formatted %></div>
+		<div><%= link_to loot.character.name, loot_path(loot) %> on <%= loot.received_on_formatted %></div>
 	<% end %>
 <% end %>
