@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120524155417) do
+ActiveRecord::Schema.define(:version => 20131001161119) do
 
   create_table "bosses", :force => true do |t|
     t.string   "name"
@@ -49,17 +49,19 @@ ActiveRecord::Schema.define(:version => 20120524155417) do
     t.integer  "armory_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "quality"
   end
 
   create_table "loots", :force => true do |t|
     t.integer  "character_id"
     t.integer  "item_id"
-    t.boolean  "equipped",     :default => false
-    t.boolean  "disenchanted", :default => false
-    t.boolean  "main",         :default => true
+    t.boolean  "equipped",             :default => false
+    t.boolean  "disenchanted",         :default => false
+    t.boolean  "main",                 :default => true
     t.date     "received_on"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
+    t.boolean  "is_manual_assignment"
   end
 
   create_table "slots", :force => true do |t|
