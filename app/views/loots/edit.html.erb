@@ -1,11 +1,36 @@
-<h2><%= @loot.item.name %></h2>
+<%= form_for @loot, :html => { :class => "form-horizontal well", :role => "form" } do |f| %>
+	<div class="form-group">
+		<%= f.label(:item_id, class: "control-label col-lg-2")%>
+	    <div class="col-lg-4">
+	      <p class="form-control-static"><%= @loot.item.name %></p>
+	    </div>
+	</div>
 
-<%= form_for @loot do |f| %>
-	<div>Looted by: <%= f.select :character_id, Character.order("name").all.collect { |p| [p.name, p.id] }, { include_blank: true }%></div>
-	<div>Received on <%= @loot.received_on_formatted %></div>
-	<div>Manual Assignment: <%= f.check_box :is_manual_assignment %></div>
+	<div class="form-group">
+		<%= f.label(:character_id, "Received by", class: "control-label col-lg-2")%>
+	    <div class="col-lg-4">
+	      <%= f.select :character_id, Character.order("name").all.collect { |p| [p.name, p.id] }, { include_blank: true }, :class => "form-control" %>
+	    </div>
+	</div>
 	
-	<br/>
+	<div class="form-group">
+		<%= f.label(:received_on, class: "control-label col-lg-2")%>
+	    <div class="col-lg-4">
+	      <p class="form-control-static"><%= @loot.received_on_formatted %></p>
+	    </div>
+	</div>
 	
-	<div><%= link_to "Cancel", loot_path(@loot), :class => "btn" %> <%= f.submit "Save", class: "btn btn-primary" %></div>
+	<div class="form-group">
+		<%= f.label(:is_manual_assignment, class: "control-label col-lg-2")%>
+	    <div class="col-lg-4">
+	      <%= f.check_box :is_manual_assignment, class: "form-control" %>
+	    </div>
+	</div>
+	
+	<div class="form-group">
+		<div class="col-lg-offset-2 col-lg-4">
+			<%= f.submit "Save", class: "btn btn-primary" %>
+			<%= link_to "Cancel", loot_path(@loot), :class => "btn btn-default" %> 
+		</div>
+	</div>
 <% end %>
