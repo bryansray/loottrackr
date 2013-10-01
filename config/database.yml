@@ -25,4 +25,4 @@ production:
   username: root
   password: control*88
   host: localhost
-  database: loottrackr
+  database: lootr
