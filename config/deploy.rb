@@ -1,4 +1,7 @@
+ssh_options[:forward_agent] = true
 default_run_options[:pty] = true
+
+set :deploy_to, '/var/www/lootr.virtualbind.com'
 
 set :application, "loottrackr"
 set :repository,  "git@github.com:bryansray/loottrackr.git"
@@ -10,8 +13,6 @@ role :web, "50.116.23.150"                          # Your HTTP server, Apache/e
 role :app, "50.116.23.150"                          # This may be the same as your `Web` server
 role :db,  "50.116.23.150", :primary => true # This is where Rails migrations will run
 role :db,  "50.116.23.150"
-
-set :deploy_to '/var/www/lootr.virtualbind.com'
 
 # if you want to clean up old releases on each deploy uncomment this:
 # after "deploy:restart", "deploy:cleanup"
@@ -27,3 +28,15 @@ set :deploy_to '/var/www/lootr.virtualbind.com'
 #     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
 #   end
 # end
+
+after :deploy, 'deploy:link_dependencies'
+
+namespace :deploy do
+  desc <<-DESC
+  Creates symbolic links to configuration files and other dependencies.
+  DESC
+  
+  task :link_dependencies, :roles => :app do
+    run "ln -nfs #{shared_path}/public/cache #{release_path}/public/cache"
+  end
+end
