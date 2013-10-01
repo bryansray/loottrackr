@@ -4,7 +4,7 @@ require 'json'
 class CharactersController < ApplicationController
   def show
     @character = Character.find(params[:id])
-    # @grouped_loot = @character.loots.where("item_id IS NOT NULL AND received_on IS NOT NULL").order("received_on DESC").group("MONTH(received_on)")
+    @cached_file_at = File.mtime(Rails.public_path + "/cache/character.#{@character.id}.json") if File.exists?(Rails.public_path + "/cache/character.#{@character.id}.json")
     @recent_loot = @character.loots.where("item_id IS NOT NULL AND received_on IS NOT NULL").order("received_on DESC")
   end
   
@@ -42,6 +42,8 @@ class CharactersController < ApplicationController
     
     @character.item_level = average_item_level
     @character.equipped_item_level = average_equipped_item_level
+    
+    @character.updated_at = Time.now
     
     @character.save
     

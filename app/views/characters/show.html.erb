@@ -3,7 +3,7 @@
 
 <h2><span class="<%= @character.clazz.gsub(/\s+/, "").underscore %>"><%= @character.name %></span> - <span><%= @character.item_level%></span> (<%= @character.equipped_item_level %>)</span></h2>
 
-<div>Last updated <%= time_ago_in_words(@character.updated_at) %>
+<div>last updated <%= time_ago_in_words(@character.updated_at) %> ago <% if @cached_file_at %> <span class="armory-cache" style="color: #cecece">| armory cached <%= time_ago_in_words(@cached_file_at) %> ago<% end %></div>
 	
 <hr/>
 
