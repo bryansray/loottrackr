@@ -48,7 +48,7 @@ $(document).ready(function() {
 				}
 			},
 			yAxis: {
-				min: <%= @average_item_level %>,
+				min: <%= @average_item_level - 5 %>,
 				max: <%= @characters.map{ |c| c.gear_level }.max + 5 %>,
 				title: {
 					text: 'Average'
@@ -79,7 +79,9 @@ $(document).ready(function() {
 				}
 			},
 			legend: { enabled: false },
-			series: [{
+			series: [
+				{ type: 'line', color: '#CECECE', data: <%=raw @characters.map { |c| @average_item_level } %> },
+				{
 				data: [
 					<% @characters.each do |c| %>
 						{ name: "<%= c.name %>", color: "<%= c.css_color_code %>", y:  <%= c.item_level %> },
