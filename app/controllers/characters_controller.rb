@@ -137,7 +137,7 @@ class CharactersController < ApplicationController
         end
       end
     end
-    
+    @character.equipped_items.update_all(:equipped => false)
     slots = ["head", "neck", "shoulder", "back", "chest", "wrist", "hands", "waist", "legs", "feet", "finger1", "finger2", "trinket1", "trinket2", "mainHand", "offHand", "ranged"]
     
     slots.each do |slot|
