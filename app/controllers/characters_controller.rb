@@ -21,7 +21,7 @@ class CharactersController < ApplicationController
   
   def show
     @character = Character.find_by_name(params[:id])
-    @cached_file_at = File.mtime(Rails.public_path + "/cache/character.#{@character.name}.json") if File.exists?(Rails.public_path + "/cache/character.#{@character.name}.json")
+    @cached_file_at = File.mtime(Rails.public_path + "/cache/character.#{@character.to_param}.json") if File.exists?(Rails.public_path + "/cache/character.#{@character.name}.json")
     @average_items = Item.find_by_sql("select slot, AVG(level) as 'level', STD(level) as 'standard_deviation' FROM items INNER JOIN loots ON items.id = loots.item_id INNER JOIN characters ON loots.character_id = characters.id WHERE characters.main = true AND loots.equipped = true and slot is NOT NULL GROUP BY slot ORDER BY slot")
     @average_items.each do |i|
       i.standard_deviation = ActiveRecord::Base.connection.select_value("select STD(level) as 'standard_deviation' FROM items INNER JOIN loots ON items.id = loots.item_id INNER JOIN characters ON loots.character_id = characters.id WHERE characters.main = true AND loots.equipped = true and slot is NOT NULL and slot = '#{i.slot}' GROUP BY slot ORDER BY slot").to_f
