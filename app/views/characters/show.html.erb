@@ -37,13 +37,25 @@
 			<thead>
 				<tr>
 					<th>Equipped Item</th>
+					<th>Item Level</th>
 					<th>Slot</th>
 				</tr>
 			</thead>
 			<tbody>
-				<% @character.equipped_items.each do |item| %>
+				<% @character.equipped_items.order(:slot).each do |item| %>
+				<% average_item = @average_items.find { |i| i.slot.downcase == item.slot.downcase } %>
 				<tr>
-					<td><%= link_to item.name, item_path(item), :rel => "item=#{item.armory_id}", :class => "quality-#{item.quality.nil? ? 0 : item.quality}" %> (<%= item.level %>)</td>
+					<%
+					if item.level < (average_item.level - average_item.standard_deviation).to_i then
+						css = "red"
+					elsif item.level > (average_item.level + average_item.standard_deviation).to_i then
+						css = "blue"
+					else
+						css = "green"
+					end
+					%>
+					<td><%= link_to item.name, item_path(item), :rel => "item=#{item.armory_id}", :class => "quality-#{item.quality.nil? ? 0 : item.quality}" %></td>
+					<td class="text-center"><span class="badge <%= css %>"><%= item.level %></span></td>
 					<td><%= item.slot %></td>
 				</tr>
 				<% end %>

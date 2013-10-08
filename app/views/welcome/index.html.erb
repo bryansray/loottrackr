@@ -80,7 +80,7 @@ $(document).ready(function() {
 			},
 			legend: { enabled: false },
 			series: [
-				{ type: 'line', color: '#CECECE', data: <%=raw @characters.map { |c| @average_item_level } %> },
+				{ type: 'line', color: '#CECECE', data: <%=raw @characters.map { |c| @average_item_level.to_i } %> },
 				{
 				data: [
 					<% @characters.each do |c| %>

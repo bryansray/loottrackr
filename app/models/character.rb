@@ -36,7 +36,7 @@ class Character < ActiveRecord::Base
   end
   
   def to_param
-    name
+    name.downcase
   end
   
   private

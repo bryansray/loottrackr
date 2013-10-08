@@ -1,5 +1,6 @@
 class Item < ActiveRecord::Base
-  attr_accessible :name, :level, :dropped_by, :item_type, :slot, :wowhead_id, :armory_id, :quality
+  attr_accessor :standard_deviation
+  attr_accessible :name, :level, :dropped_by, :item_type, :slot, :wowhead_id, :armory_id, :quality, :standard_deviation
   
   # belongs_to :slot
   
