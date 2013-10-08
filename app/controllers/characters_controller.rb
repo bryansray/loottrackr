@@ -20,8 +20,8 @@ class CharactersController < ApplicationController
   end
   
   def show
-    @character = Character.find_by_name(params[:id])
-    @cached_file_at = File.mtime(Rails.public_path + "/cache/character.#{@character.to_param}.json") if File.exists?(Rails.public_path + "/cache/character.#{@character.name}.json")
+    @character = Character.find_by_name(params[:id])    
+    @cached_file_at = File.mtime(Rails.public_path + "/cache/character.#{@character.to_param}.json") if File.exists?(Rails.public_path + "/cache/character.#{@character.to_param}.json")
     @average_items = Item.find_by_sql("select slot, AVG(level) as 'level', STD(level) as 'standard_deviation' FROM items INNER JOIN loots ON items.id = loots.item_id INNER JOIN characters ON loots.character_id = characters.id WHERE characters.main = true AND loots.equipped = true and slot is NOT NULL GROUP BY slot ORDER BY slot")
     @average_items.each do |i|
       i.standard_deviation = ActiveRecord::Base.connection.select_value("select STD(level) as 'standard_deviation' FROM items INNER JOIN loots ON items.id = loots.item_id INNER JOIN characters ON loots.character_id = characters.id WHERE characters.main = true AND loots.equipped = true and slot is NOT NULL and slot = '#{i.slot}' GROUP BY slot ORDER BY slot").to_f
@@ -44,14 +44,14 @@ class CharactersController < ApplicationController
     api = Battlenet.new :us
       
     response_string = ""
-    if use_cached_file?(Rails.public_path + "/cache/character.#{params[:id]}.json")
-      File.open(Rails.public_path + "/cache/character.#{params[:id]}.json", "r") do |f|
+    if use_cached_file?(Rails.public_path + "/cache/character.#{@character.to_param}.json")
+      File.open(Rails.public_path + "/cache/character.#{@character.to_param}.json", "r") do |f|
         f.each { |line| response_string += line }
       end
     else
       response_string = api.character(@character.server, @character.name, :fields => "items,feed,progression,quests,talents").to_json
 
-      File.open(Rails.public_path + "/cache/character.#{params[:id]}.json", "w") do |f|
+      File.open(Rails.public_path + "/cache/character.#{@character.to_param}.json", "w") do |f|
         f.write(response_string)
       end
     end
