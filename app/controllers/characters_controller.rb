@@ -120,16 +120,15 @@ class CharactersController < ApplicationController
           item_level =item["itemLevel"]
           item_quality = item["quality"]
 
-          item = Item.new :name => item_name, :level => item_level, :armory_id => item_id
-          item.save
+          item = Item.new :name => item_name, :level => item_level, :armory_id => item_id, :quality => item_quality
         else
           json_item = JSON.parse(item_string)
           
           item.quality = json_item["quality"]
           item.slot = inventoryType[json_item["inventoryType"]]
-          
-          item.save
         end
+        
+        item.save
         
         # TODO - I Need to determine how to handle the situation
         # where a character receives an item via the armory
@@ -139,7 +138,7 @@ class CharactersController < ApplicationController
         loot = Loot.where("item_id = ? and character_id = ? and DATE(received_on) = DATE(?)", item.id, @character.id, timestamp).first
         
         if not loot then
-          loot = Loot.new(character: @character, item: item, received_on: timestamp, equipped: false, disenchanted: false)
+          loot = Loot.new(character: @character, item: item, received_on: timestamp, equipped: false, disenchanted: false) unless item.nil?
           loot.save
         end
       end
@@ -171,8 +170,8 @@ class CharactersController < ApplicationController
       if not item
         item_name = json_item["name"]
         item_level = json_item["itemLevel"]
-
-        item = Item.new :name => item_name, :level => item_level, :slot => slot, :armory_id => item_id
+        item_quality = json_item["quality"]
+        item = Item.new :name => item_name, :level => item_level, :slot => slot, :armory_id => item_id, :quality => item_quality
       else
         item.quality = json_item["quality"]
         item.slot = inventoryType[json_item["inventoryType"]]
