@@ -1,6 +1,6 @@
 class WelcomeController < ApplicationController
   def index
-    @recent_loot = Loot.order("received_on DESC").limit(25)
+    @recent_loot = Loot.joins(:item).where("item_id IS NOT NULL AND items.level >= ?", 533).order("received_on DESC").limit(25)
     
     averages = @characters.map{ |c| c.gear_level }
     total = averages.inject(:+)
