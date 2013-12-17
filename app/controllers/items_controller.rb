@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   def show
-    @item = Item.find_by_armory_id(params[:id])
+    @item = Item.find(params[:id])
     @loots = Loot.where("item_id = ?", @item.id)
   end
   

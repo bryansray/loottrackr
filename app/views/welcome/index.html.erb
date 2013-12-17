@@ -1,6 +1,6 @@
 <div id="gear-level-chart">Chart</div>
 
-<div class="recent-loot col-lg-8">
+<div class="recent-loot col-lg-12">
 	<div><strong>Recently Looted Items</strong> - <%= link_to "View All", loots_path %>
 
 	<table class="table table-striped">
@@ -49,7 +49,8 @@ $(document).ready(function() {
 			},
 			yAxis: {
 				min: <%= @average_item_level - 5 %>,
-				max: <%= @characters.map{ |c| c.gear_level }.max + 5 %>,
+				// <%= @characters.map { |c| c.gear_level }.max %>
+				max: <%= @characters.map{ |c| c.equipped_item_level }.max + 5 unless @characters.empty? %>,
 				title: {
 					text: 'Average'
 				},
@@ -69,22 +70,16 @@ $(document).ready(function() {
 				}
 			},
 			plotOptions: {
-				bar: {
-					borderWidth: 1,
-					pointWidth: 20
-				},
 				column: {
 					pointWidth: 15,
 					dataLabels: { enabled: false }
 				}
 			},
 			legend: { enabled: false },
-			series: [
-				{ type: 'line', color: '#CECECE', data: <%=raw @characters.map { |c| @average_item_level.to_i } %> },
-				{
+			series: [ {
 				data: [
 					<% @characters.each do |c| %>
-						{ name: "<%= c.name %>", color: "<%= c.css_color_code %>", y:  <%= c.item_level %> },
+						{ name: "<%= c.name %>", color: "<%= c.css_color_code %>", y: <%= c.equipped_item_level %> },
 					<% end %>
 				]
 			}]

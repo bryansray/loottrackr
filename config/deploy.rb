@@ -35,8 +35,22 @@ namespace :deploy do
   desc <<-DESC
   Creates symbolic links to configuration files and other dependencies.
   DESC
-  
   task :link_dependencies, :roles => :app do
     run "ln -nfs #{shared_path}/cache #{release_path}/public/cache"
+  end
+  
+  desc "Start the Thin processes"
+  task :start do
+    run "thin start -C /etc/thin/lootr.yml"
+  end
+  
+  desc "Stop the Thin processes"
+  task :stop do
+    run "thin stop -C /etc/thin/lootr.yml"
+  end
+  
+  desc "Restart the Thin processes"
+  task :restart do
+    run "thin restart -C /etc/thin/lootr.yml"
   end
 end

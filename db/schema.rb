@@ -9,37 +9,44 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended to check this file into your version control system.
+# It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131001161119) do
+ActiveRecord::Schema.define(version: 20131217014045) do
 
-  create_table "bosses", :force => true do |t|
+  create_table "bosses", force: true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  create_table "characters", :force => true do |t|
+  create_table "characters", force: true do |t|
     t.string   "name"
     t.string   "server"
     t.string   "description"
     t.string   "clazz"
-    t.boolean  "main",                :default => true
+    t.boolean  "main",                default: true
     t.integer  "item_level"
     t.integer  "equipped_item_level"
-    t.datetime "created_at",                            :null => false
-    t.datetime "updated_at",                            :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  create_table "drops", :force => true do |t|
+  create_table "drops", force: true do |t|
     t.integer  "boss_id"
     t.integer  "item_id"
     t.date     "dropped_on"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  create_table "items", :force => true do |t|
+  create_table "guilds", force: true do |t|
+    t.string   "name"
+    t.boolean  "active"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "items", force: true do |t|
     t.string   "name"
     t.integer  "level"
     t.string   "dropped_by"
@@ -47,27 +54,27 @@ ActiveRecord::Schema.define(:version => 20131001161119) do
     t.string   "item_type"
     t.integer  "wowhead_id"
     t.integer  "armory_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "quality"
   end
 
-  create_table "loots", :force => true do |t|
+  create_table "loots", force: true do |t|
     t.integer  "character_id"
     t.integer  "item_id"
-    t.boolean  "equipped",             :default => false
-    t.boolean  "disenchanted",         :default => false
-    t.boolean  "main",                 :default => true
+    t.boolean  "equipped",             default: false
+    t.boolean  "disenchanted",         default: false
+    t.boolean  "main",                 default: true
     t.date     "received_on"
-    t.datetime "created_at",                              :null => false
-    t.datetime "updated_at",                              :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "is_manual_assignment"
   end
 
-  create_table "slots", :force => true do |t|
+  create_table "slots", force: true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

@@ -4,37 +4,34 @@
 	<head>
 		<title>loot trackr</title>
 		
-		<%= stylesheet_link_tag    "application", "bootstrap" %>
-		<%= javascript_include_tag "application", "jquery-1.7.2" %>
-		<%= javascript_include_tag "application", "highcharts/highcharts" %>
-
+		<%= stylesheet_link_tag    "application", "bootstrap", "slick.grid.css", "slick-default-theme.css" %>
+		<%= javascript_include_tag "application" %>
+		
 		<script type="text/javascript" src="http://static.wowhead.com/widgets/power.js"></script>
 		
 		<%= csrf_meta_tags %>
 	</head>
 	<body>
+		<div class="row">
+			<div class="col-md-2 sidebar">
+				<ul class="nav nav-pills nav-stacked">
+					<li><%= link_to "Overview", root_path, :class => "brand" %></li>
+					<li style="border-bottom: 2px solid #efefef;"><%= link_to "Characters", characters_path, :class => "brand" %></li>
+				</ul>
+				<ul class="nav nav-pills nav-stacked characters">
+					<% @characters.each do |character| %>
+						<li class="<%= active?(character) %> <%= character.clazz.gsub(/\s+/, "").underscore %>">
+							<%= link_to character.name, character_path(character) %>
+						</li>
+					<% end %>
+				</ul>
+			</div>
 
-			<div class="row">
-				<div class="col-md-2 sidebar">
-					<ul class="nav nav-pills nav-stacked">
-						<li><%= link_to "Overview", root_path, :class => "brand" %></li>
-						<li style="border-bottom: 2px solid #efefef;"><%= link_to "Characters", characters_path, :class => "brand" %></li>
-					</ul>
-					<ul class="nav nav-pills nav-stacked characters">
-						<% @characters.each do |character| %>
-							<li class="<%= active?(character) %> <%= character.clazz.gsub(/\s+/, "").underscore %>">
-								<%= link_to character.name, character_path(character) %>
-							</li>
-						<% end %>
-					</ul>
-				</div>
-
-				<div class="col-md-10 main">
-					<div class="wrapper">
-						<%= yield %>
-					</div>
+			<div class="col-md-10 main">
+				<div class="wrapper">
+					<%= yield %>
 				</div>
 			</div>
-		
+		</div>	
 	</body>
 </html>

@@ -54,7 +54,8 @@
 						css = "green"
 					end
 					%>
-					<td><%= link_to item.name, item_path(item), :rel => "item=#{item.armory_id}", :class => "quality-#{item.quality.nil? ? 0 : item.quality}" %></td>
+					<td>
+						<%= link_to item.name, item_path(item), :class => "quality-#{item.quality ? 0 : item.quality}" %></td>
 					<td class="text-center"><span class="badge <%= css %>"><%= item.level %></span></td>
 					<td><%= item.slot %></td>
 				</tr>

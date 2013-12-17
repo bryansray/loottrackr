@@ -10,17 +10,17 @@ class CharactersController < ApplicationController
   end
   
   def create
-    @character = Character.new(params[:character])
+    @character = Character.new(character_params)
     
     if @character.save
-      redirect_to @character
+      redirect_to new_character_path
     else
       render :action => :new
     end
   end
   
   def show
-    @character = Character.find_by_name(params[:id])    
+    @character = Character.find(params[:id])    
     @cached_file_at = File.mtime(Rails.public_path + "/cache/character.#{@character.to_param}.json") if File.exists?(Rails.public_path + "/cache/character.#{@character.to_param}.json")
     @average_items = Item.find_by_sql("select slot, AVG(level) as 'level', STD(level) as 'standard_deviation' FROM items INNER JOIN loots ON items.id = loots.item_id INNER JOIN characters ON loots.character_id = characters.id WHERE characters.main = true AND loots.equipped = true and slot is NOT NULL GROUP BY slot ORDER BY slot")
     @average_items.each do |i|
@@ -40,18 +40,18 @@ class CharactersController < ApplicationController
   end
   
   def update
-    @character = Character.find_by_name(params[:id])
+    @character = Character.find(params[:id])
     api = Battlenet.new :us
       
     response_string = ""
-    if use_cached_file?(Rails.public_path + "/cache/character.#{@character.to_param}.json")
-      File.open(Rails.public_path + "/cache/character.#{@character.to_param}.json", "r") do |f|
+    if use_cached_file?(Rails.public_path + "cache/character.#{@character.to_param}.json")
+      File.open(Rails.public_path + "cache/character.#{@character.to_param}.json", "r") do |f|
         f.each { |line| response_string += line }
       end
     else
       response_string = api.character(@character.server, @character.name, :fields => "items,feed,progression,quests,talents").to_json
 
-      File.open(Rails.public_path + "/cache/character.#{@character.to_param}.json", "w") do |f|
+      File.open(Rails.public_path + "cache/character.#{@character.to_param}.json", "w") do |f|
         f.write(response_string)
       end
     end
@@ -102,12 +102,12 @@ class CharactersController < ApplicationController
         timestamp = Time.at(feed["timestamp"].to_s.chop.chop.chop.to_i)
         item_id = feed["itemId"]
 
-        if File.exists?(Rails.public_path + "/cache/item.#{item_id}.json")
-          item_string = File.read(Rails.public_path + "/cache/item.#{item_id}.json")
+        if File.exists?(Rails.public_path + "cache/item.#{item_id}.json")
+          item_string = File.read(Rails.public_path + "cache/item.#{item_id}.json")
         else
           item_string = api.item(item_id).to_json
           
-          File.open(Rails.public_path + "/cache/item.#{item_id}.json", "w") do |f|
+          File.open(Rails.public_path + "cache/item.#{item_id}.json", "w") do |f|
             f.write(item_string)
           end
         end
@@ -143,7 +143,7 @@ class CharactersController < ApplicationController
         end
       end
     end
-    @character.equipped_items.update_all(:equipped => false)
+    # @character.equipped_items.update_all(equipped: false)
     slots = ["head", "neck", "shoulder", "back", "chest", "wrist", "hands", "waist", "legs", "feet", "finger1", "finger2", "trinket1", "trinket2", "mainHand", "offHand", "ranged"]
     
     slots.each do |slot|
@@ -151,14 +151,14 @@ class CharactersController < ApplicationController
       item_id = json_character["items"][slot]["id"]
       
       response_string = ""
-      if File.exists?(Rails.public_path + "/cache/item.#{item_id}.json")
-        File.open(Rails.public_path + "/cache/item.#{item_id}.json", "r") do |f|
+      if File.exists?(Rails.public_path + "cache/item.#{item_id}.json")
+        File.open(Rails.public_path + "cache/item.#{item_id}.json", "r") do |f|
           f.each { |line| response_string += line }
         end
       else
         response_string = api.item(item_id).to_json
         
-        File.open(Rails.public_path + "/cache/item.#{item_id}.json", "w") do |f|
+        File.open(Rails.public_path + "cache/item.#{item_id}.json", "w") do |f|
           f.write(response_string)
         end
       end
@@ -198,4 +198,9 @@ class CharactersController < ApplicationController
       
     redirect_to @character
   end
+
+  private
+    def character_params
+      params.require(:character).permit(:name, :clazz, :server)
+    end
 end
